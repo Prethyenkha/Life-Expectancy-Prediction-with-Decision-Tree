@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Life Expectancy Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🌍 Life Expectancy Predictor</h1>
+    <form method="POST">
+      <label>Country:</label>
+      <input type="text" name="Country" required>
+
+      <label>Status (Developing or Developed):</label>
+      <input type="text" name="Status" required>
+
+      <label>Year:</label>
+      <input type="number" name="Year" required>
+
+      <label>Adult Mortality:</label>
+      <input type="number" name="AdultMortality" step="0.1" required>
+
+      <label>Alcohol:</label>
+      <input type="number" name="Alcohol" step="0.1" required>
+
+      <label>BMI:</label>
+      <input type="number" name="BMI" step="0.1" required>
+
+      <label>Schooling:</label>
+      <input type="number" name="Schooling" step="0.1" required>
+
+      <label>GDP:</label>
+      <input type="number" name="GDP" step="0.1" required>
+
+      <label>Population:</label>
+      <input type="number" name="Population" step="0.1" required>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction is not none %}
+      <div class="result">
+        {% if prediction|string.startswith('Error') %}
+          <p class="error">{{ prediction }}</p>
+        {% else %}
+          <p>Predicted Life Expectancy: <strong>{{ prediction }} years</strong></p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
